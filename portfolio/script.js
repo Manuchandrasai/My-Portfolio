@@ -43,3 +43,21 @@ function toggleDetails(el) {
   }
 }
 
+
+// Scroll Animations
+const observerOptions = {
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('reveal');
+      observer.unobserve(entry.target); // Only animate once
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.section, .experience-card, .project-card, .card, .certification-card').forEach(el => {
+  observer.observe(el);
+});
